@@ -1,0 +1,6 @@
+package free
+
+modules = Control.Monad.Free
+        , Control.Monad.Free.Church
+        , Control.Monad.Trans.Free
+        , Control.Monad.Trans.Free.Church
