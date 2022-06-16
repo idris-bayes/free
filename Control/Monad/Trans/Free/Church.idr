@@ -38,5 +38,9 @@ hoistFT : (Monad m, Monad n) => (forall x. m x -> n x) -> FT f m a -> FT f n a
 hoistFT phi (MkFT m) = MkFT (\kp, kf => join . phi $ m (pure . kp) (\xg => pure . kf (join . phi . xg)))
 
 export
-iterT : (Functor f, Monad m, MonadTrans t, Monad (t m)) => (f (t m a) -> t m a) -> FT f m a -> t m a
-iterT f (MkFT m) = join . lift $ m (pure . pure) (\xg => pure . f . map (join . lift . xg))
+iterT : (Functor f, Monad m) => (f (m a) -> m a) -> FT f m a -> m a
+iterT f (MkFT m) = m pure (\xg => f . map xg)
+
+export
+iterTM : (Functor f, Monad m, MonadTrans t, Monad (t m)) => (f (t m a) -> t m a) -> FT f m a -> t m a
+iterTM f (MkFT m) = join . lift $ m (pure . pure) (\xg => pure . f . map (join . lift . xg))
