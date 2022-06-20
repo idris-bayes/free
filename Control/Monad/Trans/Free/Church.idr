@@ -30,7 +30,7 @@ MonadTrans (FT f) where
   lift m = MkFT (\a, _ => m >>= a)
 
 export
-{f : _} -> {m : _} -> MonadFree f (FT f m) where
+MonadFree f (FT f m) where
   wrap f = MkFT (\kp, kf => kf (\ft => runFT ft kp kf) f)
 
 export
