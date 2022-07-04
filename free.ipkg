@@ -1,5 +1,9 @@
 package free
 
+authors     = "Jacob Walters"
+license     = "The BSD 3-Clause License"
+sourceloc   = "www.github.com/idris-bayes/free"
+
 modules = Control.Monad.Free
         , Control.Monad.Free.Church
         , Control.Monad.Trans.Free
